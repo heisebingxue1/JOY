@@ -1,0 +1,26 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+		<title>EventCustom</title>
+		<script type='text/javascript' src='../../lib/EventCustom.js.js'></script>
+	</head>
+
+	<body>
+		<script type='text/javascript'>
+			var e = new JOY.EventCustom();
+
+			e.on('msg', f1, [{a: 1}]);
+			e.on('msg', f1, [{a: 1}]);
+			e.on('msg', f2);
+			e.on('msg2', f2);
+
+			e.fire(); // f1 1   f1 1   f2   f2
+			e.fire('msg'); // f1 1   f1 1   f2 undefined
+			e.fire({type: 'msg2', b:1}); // f2 1
+			e.off('msg');
+			e.fire(); // f2
+			e.off();
+			e.fire();
+		</script>
+	</body>
+</html>
