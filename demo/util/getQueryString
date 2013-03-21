@@ -1,6 +1,6 @@
 <!DOCTYPE HTML>
 <html>
-  <head>
+	<head>
 		<title>getQueryString</title>
 		<script type='text/javascript' src='../../util/getQueryString.js'></script>
 	</head>
