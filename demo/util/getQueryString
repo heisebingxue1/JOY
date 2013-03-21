@@ -1,0 +1,14 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+		<title>getQueryString</title>
+		<script type='text/javascript' src='../../util/getQueryString.js'></script>
+	</head>
+
+	<body>
+		<script type='text/javascript'>
+			var obj = JOY.getQueryString();
+			console.log(obj['username']);
+		</script>
+	</body>
+</html>
