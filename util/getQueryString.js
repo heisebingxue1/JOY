@@ -1,8 +1,12 @@
+/*
+    getQueryString is used to retrieve the variable values in the HTTP query string.
+*/
+
 (function(global){
     function getQueryString(){
       var m,
           result = {},
-          queryString = window.location.search.substring(1),
+          queryString = global.location.search.substring(1),
           re = /([^&=]+)=([^&]*)/g;
 
       while (m = re.exec(queryString)) {
