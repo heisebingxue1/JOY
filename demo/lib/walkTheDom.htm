@@ -1,0 +1,134 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+		<title>walkTheDom</title>
+		<script type='text/javascript' src='../../lib/walkTheDom.js'></script>
+	</head>
+
+	<body>
+		
+		<script type='text/javascript'>
+			function normalizeDomToObj(node, depth, returnedValue){
+				var obj, nodeValue;
+				
+				var returnedValue = returnedValue || [],
+					temp = returnedValue,
+					depth = depth * 2 - 2;
+				
+				/*
+					For example, if the depth is 2, then loop 2 times, 
+					the 1st time is get the object from the last item of array,
+					the 2nd time is get the array by reading the property of the object.
+				*/
+				
+				while(depth > 0){
+					if(depth % 2 === 0){
+						/* Now temp is an Object, it can read the property. */
+						temp = temp[temp.length-1];
+					}else{
+						for(name in temp){
+							if(!temp.hasOwnProperty(name)) { continue;}
+							/* Now temp is an Array, it can use 'push' method. */
+							temp = temp[name];
+						}
+					}
+					depth--;
+				}
+				
+				if(node.nodeType === 1 && node.firstChild){
+					obj = {};
+					nodeValue = node.firstChild.nodeValue;
+					obj[node.nodeName] = (nodeValue.trim() === '') ? []: nodeValue;
+					temp.push(obj);
+				}
+				
+				return returnedValue;
+			}
+
+		
+			function parseXML(data){
+				console.log(JOY.walkTheDom(normalizeDomToObj, data, 0));
+			}
+			
+			var xhr = new XMLHttpRequest();
+			xhr.onreadystatechange = function(){
+				if(xhr.readyState === 4){
+					if(xhr.status >= 200 && xhr.status < 300 || xhr.status === 304){
+						parseXML(xhr.responseXML);
+					}
+				}
+			}
+			
+			/*	Suppose 1.xml like this:
+			
+				<?xml version='1.0' encoding='UTF-8'?>
+				<users total='2'>
+					<user id='1'>
+						<username total='2'>
+							<name>david</name>
+							<name>bill</name>
+						</username>
+						<realname>xiao ming</realname>
+						<email>xiao.ming@sina.com</email>
+					</user>
+					<user id='2'>
+						<username>rice</username>
+						<realname>xiao mei</realname>
+						<email>xiao.mei@sina.com</email>
+					</user>
+				</users>
+			*/
+			
+			xhr.open('get', '1.xml', false);
+			xhr.overrideMimeType("text/xml; charset=UTF-8");
+			xhr.send(null);
+			
+			/*	
+				The return value is:
+				
+				[
+					users:
+					[
+						{
+							user: 
+							[
+								{
+									username:
+									[
+										{
+											name: 'david'
+										},
+										{
+											name: 'bill'
+										}
+									]
+								},
+								{
+									realname: 'xiao ming',
+								},
+								{
+									email: "xiao.ming@sina.com"
+								}
+							]
+						},
+						{
+							user:
+							[
+								{
+									username: rice
+								},
+								{
+									realname: xiao mei
+								},
+								{
+									email: xiao.mei@sina.com
+								}
+							]
+						}
+					]
+				]
+			*/
+			
+		</script>
+	</body>
+</html>
