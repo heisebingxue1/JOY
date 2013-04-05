@@ -1,0 +1,26 @@
+/*
+  Require '/util/type.js'
+  
+  Clone an object, and return a new object.
+*/
+
+(function(global){
+	function cloneObject(obj, clone){
+		var name, item, type;
+		var clone = clone || {};
+		for(var name in obj){
+			item = obj[name];
+			type = JOY.type(item);
+			if(type === 'object' || type === 'array'){
+				clone[name] = (type === 'object') ? {} : [];
+				cloneObject(item, clone[name]);
+			}else{
+				clone[name] = item;
+			}
+		}
+		return clone;
+	}
+	
+	global.JOY || (global.JOY = {});
+	global.JOY.cloneObject = cloneObject;
+})(window);
