@@ -1,0 +1,20 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+		<title>cloneObject</title>
+		<script type='text/javascript' src='../../util/type.js'></script>
+		<script type='text/javascript' src='../../util/cloneObject.js'></script>
+	</head>
+
+	<body>
+		<script type='text/javascript'>
+			var obj = {a:1, b: {c:1, d: [1, {e: 1}]}};
+			/* There are 2 ways to clone an Object, and return a new Object. */
+			
+			var newObj = {z: 1};
+			JOY.cloneObject(obj, newObj); //newObj now is {z:1, a:1, b: {c:1, d: [1, {e: 1}]}}
+			
+			var newObj2 = JOY.cloneObject(obj); //newObj2 now is {a:1, b: {c:1, d: [1, {e: 1}]}}
+		</script>
+	</body>
+</html>
