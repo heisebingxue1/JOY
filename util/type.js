@@ -5,13 +5,13 @@
 (function(global){
   var i, len, item,
       classType = {},
-		  arr = ['Boolean', 'Number', 'String', 'Function', 'Array', 'Date', 'RegExp', 'Object'],
+      arr = ['Boolean', 'Number', 'String', 'Function', 'Array', 'Date', 'RegExp', 'Object'],
       toString = Object.prototype.toString;
 
-	for(i = 0, len = arr.length; i < len; i++){
-		item = arr[i];
-		classType['[object ' + item + ']'] = item.toLowerCase();
-	}
+  for(i = 0, len = arr.length; i < len; i++){
+    item = arr[i];
+    classType['[object ' + item + ']'] = item.toLowerCase();
+  }
 
   function type(obj){
     return obj == null?
