@@ -1,0 +1,21 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+  	<title>TimerScript</title>
+		<script type='text/javascript' src='../../util/TimerScript.js'></script>
+	</head>
+
+	<body>
+		<script type='text/javascript'>
+			JOY.TimerScript.start('pushNum');
+			var len = 5000000;
+			var arr = [];
+			while(len--){
+				arr.push(len);
+			}
+			JOY.TimerScript.stop('pushNum');
+			
+			console.log(JOY.TimerScript.getTime('pushNum')); //320
+		</script>
+	</body>
+</html>
