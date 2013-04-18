@@ -8,14 +8,14 @@
 	<body>
 		<script type='text/javascript'>
 			JOY.TimerScript.start('pushNum');
-			var len = 5000000;
+			var len = 10000;
 			var arr = [];
 			while(len--){
 				arr.push(len);
 			}
 			JOY.TimerScript.stop('pushNum');
 			
-			console.log(JOY.TimerScript.getTime('pushNum')); //320
+			console.log(JOY.TimerScript.getTime('pushNum')); //34
 		</script>
 	</body>
 </html>
