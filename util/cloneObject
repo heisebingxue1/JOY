@@ -6,7 +6,7 @@
 		    cloneType = JOY.type(clone),
 		    arglen = arguments.length;
 		
-		if(cloneType === 'object' || cloneType === 'array' ||  arglen === 1){
+		if(arglen === 1 || cloneType === 'object' || cloneType === 'array'){
 			if(arglen === 1){
 				objType = JOY.type(obj);
 				if(objType === 'object' || objType === 'array'){
