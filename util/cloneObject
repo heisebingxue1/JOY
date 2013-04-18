@@ -6,13 +6,22 @@
 
 (function(global){
 	function cloneObject(obj, clone){
-		var name, item, type;
-		var clone = clone || {};
+		var name, item, itemType;
+		
+		var objType = JOY.type(obj),
+			cloneType = JOY.type(clone);
+		
+		if(cloneType !== 'object' && cloneType !== 'array'){
+			if(objType === 'object' || objType === 'array'){
+				clone = (objType === 'object') ? {} : [];
+			}
+		}
+		
 		for(var name in obj){
 			item = obj[name];
-			type = JOY.type(item);
-			if(type === 'object' || type === 'array'){
-				clone[name] = (type === 'object') ? {} : [];
+			itemType = JOY.type(item);
+			if(itemType === 'object' || itemType === 'array'){
+				clone[name] = (itemType === 'object') ? {} : [];
 				cloneObject(item, clone[name]);
 			}else{
 				clone[name] = item;
@@ -20,7 +29,7 @@
 		}
 		return clone;
 	}
-	
+
 	global.JOY || (global.JOY = {});
 	global.JOY.cloneObject = cloneObject;
 })(window);
