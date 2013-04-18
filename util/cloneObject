@@ -9,7 +9,7 @@
 		var name, item, itemType;
 		
 		var objType = JOY.type(obj),
-			cloneType = JOY.type(clone);
+		    cloneType = JOY.type(clone);
 		
 		if(cloneType !== 'object' && cloneType !== 'array'){
 			if(objType === 'object' || objType === 'array'){
