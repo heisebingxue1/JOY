@@ -1,32 +1,32 @@
-/*
-  Require '/util/type.js'
-  
-  Clone an object, and return a new object.
-*/
-
+		
 (function(global){
 	function cloneObject(obj, clone){
-		var name, item, itemType;
+		var name, item, 
+		    itemType, objType,
+		    cloneType = JOY.type(clone),
+		    arglen = arguments.length;
 		
-		var objType = JOY.type(obj),
-		    cloneType = JOY.type(clone);
-		
-		if(cloneType !== 'object' && cloneType !== 'array'){
-			if(objType === 'object' || objType === 'array'){
-				clone = (objType === 'object') ? {} : [];
+		if(cloneType === 'object' || cloneType === 'array' ||  arglen === 1){
+			if(arglen === 1){
+				objType = JOY.type(obj);
+				if(objType === 'object' || objType === 'array'){
+					clone = (objType === 'object') ? {} : [];
+				}
+			}
+			
+			for(var name in obj){
+				item = obj[name];
+				itemType = JOY.type(item);
+				if(itemType === 'object' || itemType === 'array'){
+					clone[name] = (itemType === 'object') ? {} : [];
+					cloneObject(item, clone[name]);
+				}else{
+					clone[name] = item;
+				}
 			}
 		}
 		
-		for(var name in obj){
-			item = obj[name];
-			itemType = JOY.type(item);
-			if(itemType === 'object' || itemType === 'array'){
-				clone[name] = (itemType === 'object') ? {} : [];
-				cloneObject(item, clone[name]);
-			}else{
-				clone[name] = item;
-			}
-		}
+
 		return clone;
 	}
 
