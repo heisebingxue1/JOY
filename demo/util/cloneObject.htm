@@ -8,13 +8,30 @@
 
 	<body>
 		<script type='text/javascript'>
-			var obj = {a:1, b: {c:1, d: [1, {e: 1}]}};
-			/* There are 2 ways to clone an Object, and return a new Object. */
+			/* obj is object */
+			var obj = {a:1, b: [2], c: {d: 1}};
 			
-			var newObj = {z: 1};
-			JOY.cloneObject(obj, newObj); //newObj now is {z:1, a:1, b: {c:1, d: [1, {e: 1}]}}
+				/* There are 2 ways to clone an Object, and return a new Object. */
+				var obj2 = {z: 1};
+				JOY.cloneObject(obj, obj2); 	 	//obj2 is {z:1, a:1, b:[2], c:{d:1}}
+
+				var obj3 = JOY.cloneObject(obj); 	//obj3 is {a:1, b:[2], c:{d:1}}
 			
-			var newObj2 = JOY.cloneObject(obj); //newObj2 now is {a:1, b: {c:1, d: [1, {e: 1}]}}
+			
+			/* obj is array */
+			var obj = [1,2,{a: 1}];
+			
+				/* obj2 is object */
+				var obj2 = {z: 1};
+				JOY.cloneObject(obj, obj2); //obj2 is {z:1, 0:1, 1:2, 2:{a:1}}
+				
+				/* obj2 is array */
+				var obj2 = [4, 4, 4, 4, 4];
+				JOY.cloneObject(obj, obj2); //obj2 is [1, 2, {a:1}, 4, 4]
+				
+				/* obj2 is num or string or null, return obj2 directly */
+				var obj2 = 3;
+				JOY.cloneObject(obj, obj2); //obj2 is 3
 		</script>
 	</body>
 </html>
