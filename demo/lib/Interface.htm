@@ -1,0 +1,44 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+  	<title>redefine</title>
+		<script type='text/javascript' src='../../lib/Interface.js'></script>
+	</head>
+
+	<body>
+		<script type='text/javascript'>
+			
+  		var Composite = new JOY.Interface('Composite', ['add', 'remove', 'getChild']);
+			var FormItem = new JOY.Interface('FormItem', ['save']);
+			
+			function Form(){}
+			
+			Form.prototype = {
+				add: function(){},
+				remove: function(){},
+				getChild: function(){},
+				save: function(){}
+			}
+			
+			var formInstance = new Form();
+			
+			function AddForm(formInstance){
+				JOY.Interface.ensureImplements(formInstance, Composite, FormItem);
+				this.formInstance = formInstance;
+			}
+			
+			AddForm.prototype.render = function(){
+				this.formInstance.add();
+				this.formInstance.save();
+				//.....
+			}
+			
+			var addForm = new AddForm(formInstance);
+			/*
+				If formInstance lack of some methods, it will throw Error below:
+				
+				Function JOY.Interface.ensureImplements: object does not implement the 'Composite' interface. Method 'add' was not found. 
+			*/
+		</script>
+	</body>
+</html>
