@@ -41,15 +41,19 @@
 /*
 You also can use 'prototypal Inheritance' to copy an Object.
 
+
 	function clone(obj){
 	    var F = function(){};
 	    F.prototype = obj;
 	
 	    var instance = new F;
-	    var name, item;
+	    var name, item, objType;
+
 	    for(name in instance){
 	        item = instance[name];
-	        if(typeof item === 'object'){
+		/* Don't use typeof, because typeof(new Number('2')) is equal to object */
+		objType = JOY.type(item);
+	        if(objType === 'object' || objType === 'array'){
 	            instance[name] = clone(item);
 	        }
 	    }    
