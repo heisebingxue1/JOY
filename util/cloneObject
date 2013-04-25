@@ -1,4 +1,7 @@
-		
+/*
+	'cloneObject' method: copy an Object, return a new Object.
+*/
+
 (function(global){
 	function cloneObject(obj, clone){
 		var name, item, 
@@ -33,3 +36,24 @@
 	global.JOY || (global.JOY = {});
 	global.JOY.cloneObject = cloneObject;
 })(window);
+
+
+/*
+You also can use 'prototypal Inheritance' to copy an Object.
+
+	function clone(obj){
+	    var F = function(){};
+	    F.prototype = obj;
+	
+	    var instance = new F;
+	    var name, item;
+	    for(name in instance){
+	        item = instance[name];
+	        if(typeof item === 'object'){
+	            instance[name] = clone(item);
+	        }
+	    }    
+	
+	    return instance;
+	}
+*/
