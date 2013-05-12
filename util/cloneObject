@@ -6,7 +6,7 @@
 	function cloneObject(obj, clone){
 		var name, item, 
 		    itemType, objType,
-			src, srcType,
+		    src, srcType,
 		    cloneType = JOY.type(clone),
 		    arglen = arguments.length;
 
