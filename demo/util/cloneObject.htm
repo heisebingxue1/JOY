@@ -32,16 +32,28 @@
 				/* obj2 is num or string or null, return obj2 directly */
 				var obj2 = 3;
 				JOY.cloneObject(obj, obj2); //obj2 is 3
+			
+			
+			/* if the property name is the same */
+			var obj = {a:[1,2,3]};
+			var obj2 = {a: [3,4]};
+			JOY.cloneObject(obj2, obj);  //obj is {a: [3, 4, 3]}
+			
+			
+			var obj = {a: {a:1, b:2, c:3}};
+			var obj2 = {a: {a: 5, b: 6}};
+			JOY.cloneObject(obj2, obj);  //obj is {a: {5, 6, 3}}
+			
 		</script>
 	</body>
 </html>
 
 
 /*
-	Although we can use slice to copy a new array, but if the item is an Object or Array...
+	Although we can use slice or concat to copy an array to a new array, but if the item is an Object or Array...
 	
 	var arr = [{a: 1}, 2];
-	var arr2 = arr.slice(0);
+	var arr2 = arr.slice(0); // or arr.concat()
 	arr2[0].a = 7777;
 	console.log(arr[0].a);
 	
