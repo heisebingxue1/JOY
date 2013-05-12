@@ -6,9 +6,10 @@
 	function cloneObject(obj, clone){
 		var name, item, 
 		    itemType, objType,
+			src, srcType,
 		    cloneType = JOY.type(clone),
 		    arglen = arguments.length;
-		
+
 		if(arglen === 1 || cloneType === 'object' || cloneType === 'array'){
 			if(arglen === 1){
 				objType = JOY.type(obj);
@@ -16,19 +17,28 @@
 					clone = (objType === 'object') ? {} : [];
 				}
 			}
-			
+
 			for(var name in obj){
 				item = obj[name];
 				itemType = JOY.type(item);
+				
+				src = clone[name];
+				srcType = JOY.type(src);
+				
 				if(itemType === 'object' || itemType === 'array'){
-					clone[name] = (itemType === 'object') ? {} : [];
+					if(itemType === 'object'){
+						clone[name] = src && srcType === 'object' ? src : {};
+					}else{
+						clone[name] = src && srcType === 'array' ? src : [];
+					}
+					
 					cloneObject(item, clone[name]);
 				}else{
 					clone[name] = item;
 				}
 			}
 		}
-		
+
 
 		return clone;
 	}
