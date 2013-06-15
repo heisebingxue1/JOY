@@ -5,15 +5,15 @@
 
 (function(global){
     function memoize(cache, fundamental){
-		  cache = cache || {};
-  		var shell = function(arg){
-  			if(!cache.hasOwnProperty(arg)){
-  				cache[arg] = fundamental(shell, arg);
-  			}
-        return cache[arg];
-  		}
-    	return shell;
+	cache = cache || {};
+	var shell = function(arg){
+	    if(!cache.hasOwnProperty(arg)){
+	        cache[arg] = fundamental(shell, arg);
+            }
+            return cache[arg];
   	}
+        return shell;
+    }
 
     global.JOY || (global.JOY = {});
     global.JOY.memoize = memoize;
