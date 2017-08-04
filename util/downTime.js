@@ -15,7 +15,7 @@ DownTimeMsec.prototype = {
       var t = (d2 - d1);
       var timeNow = time - t;
       timeNow = timeNow < 0 ? 0 : timeNow;
-      var timeSec  = Math.ceil(timeNow / 1000);
+      var timeSec  = Math.round(timeNow / 1000);
       if(typeof func === 'function'){
         func(timeNow, timeSec);
       }
