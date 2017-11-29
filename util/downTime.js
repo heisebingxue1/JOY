@@ -1,6 +1,6 @@
 const DownTimeMsec = function (time, loopTime, isDelay) {
     this.time = parseInt(time, 10);
-    this.loopTime = loopTime || 50;
+    this.loopTime = loopTime || 1000;
     this.timeout = null;
     this.isDelay = isDelay;
 }
