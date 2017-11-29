@@ -21,7 +21,7 @@ DownTimeMsec.prototype = {
                     所以得放在 this.timeout =... 后面执行
                 */
                 if (typeof func === 'function') {
-                    func(timeNow, timeSec);
+                    func(timeSec, timeNow);
                 }
             }
             if (timeNow > 0) {
